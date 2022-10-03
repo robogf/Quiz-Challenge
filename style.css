@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.top-container{
+    border:20px;
+    border-style: solid;
+    border-color: burlywood;
+    font-family: sans-serif;
+    background-color: burlywood;
+}
+
+.top-container p{
+    font-size: 20px;
+    float: right;
+    margin: auto;
+}
+
+.high-button{
+    border-style: none;
+}
+
+.main-container {
+    margin-bottom: 30vh;
+   
+}
+
+.main-container h1{
+    text-align: center;
+}
+
+.main-container button{
+    
+    display: block;
+    margin: 0 auto; 
+}
