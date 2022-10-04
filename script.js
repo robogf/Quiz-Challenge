@@ -3,71 +3,56 @@ var mainContainer = document.getElementById ('main-container')
 var timeCon = document.getElementById ('timeId')
 var questionContainer = document.getElementById ('question-container')
 var questionList = document.getElementById('question')
-var answerChoices= document.getElementById ('answer-buttons')
+var answerChoices= document.querySelectorAll ('.answer-buttons')
 var btn1= document.querySelector ("#ansBtn1")
 var btn2= document.querySelector("#ansBtn2")
 var btn3= document.querySelector ("#ansBtn3")
 var btn4= document.querySelector ("#ansBtn4")
-
+var checkAnswer = document.querySelector ("#check-answer")
+var questionCount = 1;
 var timer = 75
 var questions = [
     {
         question: 'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?',
-        answers: [
-          {text: 'last()', 
-           correct: false},
-          {text: 'put()', 
-          correct: false},
-          {text: 'push()',
-           correct: true},
-          {text: 'None of the Above',
-           correct:false}
-        ]
+        answers: ["last()","put()","push()","None of the Above"],
+        answer: "push()"
     },
     {
         question: 'Which built-in method reverses the order of the elements of an array?',
-        answers: [
-            {text: 'changeOrder(order)', correct:false},
-            {text: 'reverse()', correct:true},
-            {text: 'sort(order)', correct:false},
-            {text: 'None of the above ', correct:false},
-
+        answers: [ "changeOrder(order)", " reverse()", "sort(order)", "None of the above "],
+        answer: "reverse()"
             
-        ]
     },
     {
         question: 'Which of the following function of String object returns the characters in a string between two indexes into the string?',
-        answers: [
-            {text: ' slice()', correct:false},
-            {text: ' split()', correct:false},
-            {text: ' substr()', correct:false},
-            {text: ' substring()', correct:true}
-        ]
+        answers: [ "slice()","split()","substr()","substring()"],
+        answer: "substring()"
+           
+        
     },
     {
         question:'Which of the following function of String object creates an HTML anchor that is used as a hypertext target?',
-        answers: [
-            {text: ' anchor()', correct:true},
-            {text: ' link ()', correct:false},
-            {text: ' blink())', correct:false},
-            {text: ' big()', correct:false},
-
-
-        ]
+        answers: [ "anchor()","link()","blink()","big()"],
+        answer: "anchor()"
+           
+         
     },
     {
         question: 'Which of the following function of Array object calls a function for each element in the array?',
-        answers: [
-            {text: ' concat()', correct:false},
-            {text: ' every()', correct:false},
-            {text: ' filter()', correct:false},
-            {text: ' forEach()', correct:true},
-        ]
+        answers: [ "concat()","every()","filter()","forEach()"],
+        answer: "forEach()"
+        
+       
     }
 ]
 var questionNumber=0;
 
 startButton.addEventListener('click',startQuiz)
+
+answerChoices.forEach(function(click){
+    click.addEventListener ('click',answerCheck)
+}
+);
 
 document.getElementById('question-container').style.display = "none";
 
@@ -93,11 +78,32 @@ function startQuiz(){
 }
 function displayQuestion(n){
     questionList.textContent = questions[n].question; 
-    btn1.textContent = questions[n].answers[0].text;
-    btn2.textContent = questions[n].answers[1].text;
-    btn3.textContent = questions[n].answers[2].text;
-    btn4.textContent = questions[n].answers[3].text;
+    btn1.textContent = questions[n].answers[0];
+    btn2.textContent = questions[n].answers[1];
+    btn3.textContent = questions[n].answers[2];
+    btn4.textContent = questions[n].answers[3];
     questionNumber = n;
     
 }
 
+function answerCheck(event){
+    event.preventDefault();
+    checkAnswer.style.display = "block";
+    setTimeout(function () {
+        checkAnswer.style.display = 'none';
+    }, 1000);
+
+    if (questions[questionNumber].answer == questions[questionNumber].answer   )
+     {
+        checkAnswer.textContent= "Correct";
+    } else {
+        timer = timer -10;
+        checkAnswer.textContent ="Wrong!";
+    }
+
+    if(questionNumber<questions.length -1 ){
+        displayQuestion(questionNumber +1); 
+    }
+
+questionCount++;
+}
