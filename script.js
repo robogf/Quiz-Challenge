@@ -2,18 +2,26 @@ var startButton = document.getElementById('start-btn')
 var mainContainer = document.getElementById ('main-container')
 var timeCon = document.getElementById ('timeId')
 var questionContainer = document.getElementById ('question-container')
-var question = document.getElementById('question')
+var questionList = document.getElementById('question')
 var answerChoices= document.getElementById ('answer-buttons')
-var answerSelect= document.getElementsByClassName(".ansBtn")
+var btn1= document.querySelector ("#ansBtn1")
+var btn2= document.querySelector("#ansBtn2")
+var btn3= document.querySelector ("#ansBtn3")
+var btn4= document.querySelector ("#ansBtn4")
+
 var timer = 75
 var questions = [
     {
         question: 'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?',
         answers: [
-          {text: 'last()',  correct: false},
-          {text: 'put()', correct: false},
-          {text: 'push()', correct: true},
-          {text: 'None of the Above', correct:false}
+          {text: 'last()', 
+           correct: false},
+          {text: 'put()', 
+          correct: false},
+          {text: 'push()',
+           correct: true},
+          {text: 'None of the Above',
+           correct:false}
         ]
     },
     {
@@ -57,10 +65,10 @@ var questions = [
         ]
     }
 ]
-
+var questionNumber=0;
 
 startButton.addEventListener('click',startQuiz)
-answerChoices.addEventListener('click',)
+
 document.getElementById('question-container').style.display = "none";
 
 
@@ -68,7 +76,8 @@ function startQuiz(){
     
     mainContainer.style.display = "none";
     questionContainer.style.display = "block";
-
+    questionNumber = 0;
+    displayQuestion(questionNumber)
     function setTime() {
 
         timeInterval = setInterval(function(){
@@ -81,5 +90,14 @@ function startQuiz(){
        
     }
     setTime();
+}
+function displayQuestion(n){
+    questionList.textContent = questions[n].question; 
+    btn1.textContent = questions[n].answers[0].text;
+    btn2.textContent = questions[n].answers[1].text;
+    btn3.textContent = questions[n].answers[2].text;
+    btn4.textContent = questions[n].answers[3].text;
+    questionNumber = n;
+    
 }
 
